@@ -6,12 +6,17 @@ const public_users = express.Router();
 
 
 public_users.post("/register", (req,res) => {
-  const register = req.params.username
-  //Check if username is in request body
-  if (req.body.username){
-    //Create or update user's details based on provided information
+    //Push a new user object into the users array based on query parameters from the request
+  if(req.query.userName != userName){
+      users.push({
+        "userName": req.query.userName,
+        "password": req.query.password
+        });
+  }else {
+    //Send error message if no user found
+    res.send("Unable to create user")
+  };
 
-  }
 });
 
 // Get the book list available in the shop
