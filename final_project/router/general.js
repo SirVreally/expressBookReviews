@@ -64,10 +64,22 @@ public_users.get('/author/:author', function (req, res) {
 });
 
 // Get all books based on title
-public_users.get('/title/:title',function (req, res) {
-  //Retrieve the book parameter from the Title and show corresponding book(s)
-  const title = req.params.title;
-  res.send(title[books]);
+public_users.get('/title/:title', function (req, res) {
+  const title = req.params.title.toLowerCase();
+
+  // Convert books object to an array
+  const booksArray = Object.values(books);
+
+  // Filter books by title (case-insensitive)
+  const filtered_books = booksArray.filter(book => 
+    book.title.toLowerCase() === title
+  );
+
+  if (filtered_books.length > 0) {
+    res.send(filtered_books);
+  } else {
+    res.status(404).send({ message: "No books found for the given title." });
+  }
 });
 
 //  Get book review
