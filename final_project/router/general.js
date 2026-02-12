@@ -83,10 +83,16 @@ public_users.get('/title/:title', function (req, res) {
 });
 
 //  Get book review
-public_users.get('/review/:isbn',function (req, res) {
-  //Retrieve the Book parameter from the review and show corresponding information
-  const review = req.params.review;
-  res.send(review[books]);
-});
+public_users.get('/review/:isbn', function (req, res) {
+    const isbn = req.params.isbn;
+  
+    const book = books[isbn];
+  
+    if (book) {
+      res.send(book.reviews);
+    } else {
+      res.status(404).send({ message: "Book not found for the given ISBN." });
+    }
+  });
 
 module.exports.general = public_users;
