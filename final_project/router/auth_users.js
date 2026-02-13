@@ -35,7 +35,8 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 regd_users.post("/login", (req,res) => {
   const username = req.body.username;
   const password = req.body.password;
-
+  app.use("/regd_users", regd_users);
+  
   if (username && password) {
     // Find user with matching username and password
     const user = users.find(user => user.username === username && user.password === password);
