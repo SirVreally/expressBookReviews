@@ -41,7 +41,13 @@ regd_users.post("/login", (req,res) => {
     const user = users.find(user => user.username === username && user.password === password);
 
     if (user) {
-      return res.status(200).json({ message: "Login successful" });
+      // Generate JWT token signed with secret key "access"
+      const accessToken = jwt.sign({ username: user.username }, "access", { expiresIn: '1h' });
+
+      // Store the token in session
+      req.session.authorization = { accessToken };
+
+      return res.status(200).json({ message: "Login successful", accessToken });
     } else {
       return res.status(401).json({ message: "Invalid username or password" });
     }
