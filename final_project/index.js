@@ -4,7 +4,7 @@ const session = require('express-session')
 
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
-const regd_users = require('./router/auth_users.js'); // adjust path as needed
+const { authenticated: regd_users } = require('./router/auth_users.js'); // adjust path as needed
 
 
 const app = express();
@@ -37,6 +37,6 @@ const PORT =5000;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
-app.use("/regd_users",regd_users);
+app.use("/regd_users", regd_users);
 
 app.listen(PORT,()=>console.log("Server is running"));
