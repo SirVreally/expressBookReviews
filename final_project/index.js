@@ -10,7 +10,7 @@ const regd_users = require('./router/auth_users.js'); // adjust path as needed
 const app = express();
 
 app.use(express.json());
-app.use('/regd_users', regd_users);
+
 
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 
