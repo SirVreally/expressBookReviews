@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}));
 
 app.use("/customer/auth/*", function auth(req,res,next){
+    console.log("Session:", req.session);
     // Check if user is logged in and has valid access token
     if (req.session.authorization) {
         let token = req.session.authorization['accessToken'];
