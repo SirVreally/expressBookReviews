@@ -3,7 +3,32 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
+const axios = require('axios');
 
+// Promise example same as above
+let myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Promise resolved");
+  }, 6000);
+});
+
+console.log("Before calling promise");
+
+async function fetchBooks() {
+  try {
+    const successMessage = await myPromise;
+    console.log("From Async-Await " + successMessage);
+
+    const response = await axios.get('http://localhost:5000/books');
+    console.log("Books list (Async-Await):", response.data);
+  } catch (error) {
+    console.error("Error fetching books:", error.message);
+  }
+}
+
+fetchBooks();
+
+console.log("After calling promise");
 
 public_users.post("/register", (req,res) => {
     const username = req.body.username;
