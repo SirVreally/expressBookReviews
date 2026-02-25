@@ -27,7 +27,7 @@ async function getBookDetailsAsync(isbn) {
       console.error(`Error fetching book details for ISBN ${isbn}:`, error.message);
     }
   }
-  
+
   function getBooksByAuthor(author) {
     axios.get(`http://localhost:5000/books/author/${encodeURIComponent(author)}`)
       .then(response => {
@@ -37,6 +37,17 @@ async function getBookDetailsAsync(isbn) {
         console.error(`Error fetching books by author "${author}":`, error.message);
       });
   }
+
+  function getBooksByTitle(title) {
+    axios.get(`http://localhost:5000/books/title/${encodeURIComponent(title)}`)
+      .then(response => {
+        console.log(`Books with title "${title}":`, response.data);
+      })
+      .catch(error => {
+        console.error(`Error fetching books with title "${title}":`, error.message);
+      });
+  }
+  
 console.log("After calling promise");
 
 public_users.post("/register", (req,res) => {
