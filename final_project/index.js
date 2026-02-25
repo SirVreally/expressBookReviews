@@ -12,7 +12,8 @@ const app = express();
 app.use(express.json());
 
 
-app.use(session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}));
+app.use(session({secret:"fingerprint_customer",resave: true, saveUninitialized: true, cookie: { secure: false }  // true if HTTPS in production
+}));
 
 app.use("/customer/auth/*", function auth(req,res,next){
     console.log("Session:", req.session);
