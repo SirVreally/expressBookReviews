@@ -5,15 +5,6 @@ let users = require("./auth_users.js").users;
 const public_users = express.Router();
 const axios = require('axios');
 
-// Promise example same as above
-let myPromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("Promise resolved");
-  }, 6000);
-});
-
-console.log("Before calling promise");
-
 async function fetchBooks() {
   try {
     const successMessage = await myPromise;
@@ -27,6 +18,15 @@ async function fetchBooks() {
 }
 
 fetchBooks();
+
+async function getBookDetailsAsync(isbn) {
+    try {
+      const response = await axios.get(`http://localhost:5000/books/${isbn}`);
+      console.log(`Book details for ISBN ${isbn}:`, response.data);
+    } catch (error) {
+      console.error(`Error fetching book details for ISBN ${isbn}:`, error.message);
+    }
+  }
 
 console.log("After calling promise");
 
