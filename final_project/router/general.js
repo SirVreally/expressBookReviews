@@ -27,7 +27,16 @@ async function getBookDetailsAsync(isbn) {
       console.error(`Error fetching book details for ISBN ${isbn}:`, error.message);
     }
   }
-
+  
+  function getBooksByAuthor(author) {
+    axios.get(`http://localhost:5000/books/author/${encodeURIComponent(author)}`)
+      .then(response => {
+        console.log(`Books by author "${author}":`, response.data);
+      })
+      .catch(error => {
+        console.error(`Error fetching books by author "${author}":`, error.message);
+      });
+  }
 console.log("After calling promise");
 
 public_users.post("/register", (req,res) => {
